@@ -15,6 +15,7 @@ app.use(cors({
                       'https://measy-web.vercel.app',
                       'https://measy-measy-pes.vercel.app/',
                       'https://measy-teste.vercel.app',
+                      
                     ],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
             credentials:true}));
