@@ -4,10 +4,10 @@ import metricsController from "../controllers/metrics"
 
 const router = express.Router()
 
-router.get("/", authUtils.verifyAuth, metricsController.index)
-router.post("/", authUtils.verifyAuth, metricsController.create)
-router.get("/:id", authUtils.verifyAuth, metricsController.read)
-router.put("/:id", authUtils.verifyAuth, metricsController.update)
-router.delete("/:id", authUtils.verifyAuth, metricsController.remove)
+router.get("/", authUtils.verifyJWT, metricsController.index)
+router.post("/", authUtils.verifyJWT, metricsController.create)
+router.get("/:id", authUtils.verifyJWT, metricsController.read)
+router.put("/:id", authUtils.verifyJWT, metricsController.update)
+router.delete("/:id", authUtils.verifyJWT, metricsController.remove)
 
 export default router

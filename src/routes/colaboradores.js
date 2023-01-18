@@ -4,10 +4,10 @@ import colaboradoresController from "../controllers/colaboradores"
 
 const router = express.Router()
 
-router.get("/", authUtils.verifyAuth ,colaboradoresController.index)
-router.post("/", authUtils.verifyAuth ,colaboradoresController.create)
-router.get("/:id", authUtils.verifyAuth ,colaboradoresController.read)
-router.put("/:id", authUtils.verifyAuth ,colaboradoresController.update)
-router.delete("/:id", authUtils.verifyAuth ,colaboradoresController.remove)
+router.get("/", authUtils.verifyJWT ,colaboradoresController.index)
+router.post("/", authUtils.verifyJWT ,colaboradoresController.create)
+router.get("/:id", authUtils.verifyJWT ,colaboradoresController.read)
+router.put("/:id", authUtils.verifyJWT ,colaboradoresController.update)
+router.delete("/:id", authUtils.verifyJWT ,colaboradoresController.remove)
 
 export default router

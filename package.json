@@ -12,15 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "dotenv-safe": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.0",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
     "sequelize": "^6.26.0",
-    "sequelize-cli": "^6.5.2",
-     "cors": "^2.8.5"
+    "sequelize-cli": "^6.5.2"
   }
-
 }

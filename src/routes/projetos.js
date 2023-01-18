@@ -4,10 +4,10 @@ import projetosController from "../controllers/projetos"
 
 const router = express.Router()
 
-router.get("/", authUtils.verifyAuth ,projetosController.index)
-router.post("/", authUtils.verifyAuth ,projetosController.create)
-router.get("/:id", authUtils.verifyAuth ,projetosController.read)
-router.put("/:id", authUtils.verifyAuth ,projetosController.update)
-router.delete("/:id", authUtils.verifyAuth ,projetosController.remove)
+router.get("/", authUtils.verifyJWT ,projetosController.index)
+router.post("/", authUtils.verifyJWT ,projetosController.create)
+router.get("/:id", authUtils.verifyJWT ,projetosController.read)
+router.put("/:id", authUtils.verifyJWT ,projetosController.update)
+router.delete("/:id", authUtils.verifyJWT ,projetosController.remove)
 
 export default router

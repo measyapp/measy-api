@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 
 //Configurando Sessões
-app.use(session({
+/*app.use(session({
     genid: () => { 
         return uuid()
     },
@@ -29,7 +29,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: {maxAge: 10000},
 }))
-
+*/
 app.use(router)
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}.`)

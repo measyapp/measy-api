@@ -4,6 +4,6 @@ import ratingsController from "../controllers/ratings"
 
 const router = express.Router()
 
-router.get("/", authUtils.verifyAuth, ratingsController.index)
+router.get("/", authUtils.verifyJWT, ratingsController.index)
 
 export default router

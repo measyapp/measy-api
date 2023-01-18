@@ -1,9 +1,9 @@
 import { v4 as uuid4 } from "uuid"
 import {Colaboradores} from "../models/index"
 import bcrypt, { hash } from "bcrypt"
-
-
+const jwt = require('jsonwebtoken');
 //action para usuário
+
 const signup = async (req, res) => {
     try {
         bcrypt.genSalt(parseInt(process.env.BCRYPT_ROUNDS), (err, salt) =>{
@@ -25,17 +25,16 @@ const login = async ( req, res) => {
         if(colaboradores){
             bcrypt.compare(req.body.senha, colaboradores.senha,(err, ok) => {
                 if (ok){
-                    req.session.userId = colaboradores.id;
-                    console.log(colaboradores.id);
-                    
-                    res.status(200).send({msg: "Colaborador Logado"});
+                    const webtoken = jwt.sign({...colaboradores},process.env.SECRET,{expiresIn: req.body.d30===true?'30d':'2h'})
+                    console.log('expiresIn:'+req.body.d30)
+                    res.status(200).send({msg: "Colaborador Logado",token: webtoken});
                 }else{
-                    res.status(406).send({msg: "Senha login não confere!"});
+                    res.status(401).send({msg: "Senha login não confere!"});
                 }
             })
 
         }else{
-            res.status(406).send({msg: "Email de login não Logado"});
+            res.status(401).send({msg: "Email de login não Logado"});
         }
     } catch (error) {
         res.status(500).send(error.message)
@@ -43,9 +42,9 @@ const login = async ( req, res) => {
 }
 
 const logout = async ( req, res) => {
-    req.session.destroy(()=>{
-        res.send({msg: "Sessão do Colaborador encerrada"});
-    })
+   console.log('logout');
+   res.status(200).send();
 }
+
 
 export default { signup, login, logout }
