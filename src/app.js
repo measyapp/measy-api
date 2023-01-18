@@ -10,11 +10,7 @@ require("dotenv").config()
 const app = express()
 const PORT =  process.env.PORT || process.env.PORT_BACK
 app.use(cors({
-            origin: [ 'http://localhost:3367',
-                      'http://localhost:3366',
-                      'https://measy-web.vercel.app',
-                      'https://measy-measy-pes.vercel.app/'
-                    ],
+            origin: process.env.ORIGIN,
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
             credentials:true}));
 app.use(express.json())
