@@ -3,9 +3,8 @@
     "username": "root",
     "password": "123456",
     "database": "framework",
-    "host": "localhost",
-    "dialect": "mysql",
-    "port":3307
+    "host": "db",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
