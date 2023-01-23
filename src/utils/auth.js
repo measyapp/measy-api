@@ -20,5 +20,13 @@ function verifyJWT(req, res, next){
     });
 }
 
+function verifyHeader(req, res, next) {
+    if ('OPTIONS' == req.method) {
+        return res.sendStatus(200);
+    } else {
+        next();
+    }
+}
 
-export default {verifyAuth,verifyJWT}
+
+export default {verifyAuth,verifyJWT,verifyHeader}

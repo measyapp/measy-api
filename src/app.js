@@ -21,13 +21,7 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true}));
 app.use(express.json())
-app.use(function(req, res, next) {
-    if ('OPTIONS' == req.method) {
-        return res.sendStatus(200);
-    } else {
-        next();
-    }
-});
+
 //Configurando Sessões
 /*app.use(session({
     genid: () => { 
