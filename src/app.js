@@ -9,6 +9,7 @@ require("dotenv").config()
 
 const app = express()
 const PORT =  process.env.PORT || process.env.PORT_BACK
+
 app.use(cors({
             origin: [ 'http://localhost:3367',
                       'http://localhost:3366',
@@ -20,6 +21,13 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true}));
 app.use(express.json())
+app.use(function(req, res, next) {
+    if ('OPTIONS' == req.method) {
+        return res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 //Configurando Sessões
 /*app.use(session({
     genid: () => { 
