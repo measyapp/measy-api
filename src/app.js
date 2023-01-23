@@ -20,7 +20,6 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
             credentials:true}));
 app.use(express.json())
-console.log(process.env.NODE_ENV);
 //Configurando Sessões
 /*app.use(session({
     genid: () => { 
