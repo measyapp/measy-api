@@ -17,7 +17,7 @@ app.use(cors({
                       'https://measy-teste.vercel.app',
                       
                     ],
-            methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+            methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true}));
 app.use(express.json())
 //Configurando Sessões
