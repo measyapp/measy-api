@@ -19,7 +19,19 @@ app.use(cors({
                       
                     ],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
-            credentials:true}));
+            credentials:true
+        }));
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // handle OPTIONS method
+    if ('OPTIONS' == req.method) {
+        return res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 app.use(express.json())
 
 //Configurando Sessões
