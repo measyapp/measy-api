@@ -21,6 +21,15 @@ module.exports = {
       tipo: {
         type: Sequelize.STRING
       },
+      linkTutorial: {
+        type: Sequelize.STRING
+      },
+      formulaMetrica: {
+        type: Sequelize.STRING
+      },
+      referencialTeorico: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
