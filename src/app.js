@@ -5,7 +5,7 @@ import cors from "cors"
 import session from "express-session"
 import { v4 as uuid } from "uuid"
 
-require("dotenv").config()
+require('dotenv').config({path:__dirname+'/./../../.env'})
 
 const app = express()
 const PORT =  process.env.PORT || process.env.PORT_BACK
@@ -15,7 +15,7 @@ app.use(cors({
                       'http://localhost:3366',
                       'https://measy-web.vercel.app',
                       'https://measy-measy-pes.vercel.app/',
-                      'https://measy-teste.vercel.app',
+                      'https://measy-teste.vercel.app'
                       
                     ],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
     }
 });
 app.use(express.json())
-
+console.log(process.env.NODE_ENV);
 //Configurando Sessões
 /*app.use(session({
     genid: () => { 
