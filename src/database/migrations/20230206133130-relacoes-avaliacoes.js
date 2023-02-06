@@ -30,7 +30,7 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     await queryInterface.removeConstraint(
       'Avaliacoes',
-      'colaboradoresFk'
+      'autorFk'
     )
     await queryInterface.removeConstraint(
       'Avaliacoes',
