@@ -18,30 +18,30 @@ const signup = async (req, res) => {
     }
 }
 
-const login = async ( req, res) => {
+const login = async (req, res) => {
     try {
-        const colaboradores =  await Colaboradores.findOne({where: { email: req.body.email}})
+        const colaboradores =  await Colaboradores.findOne({where: {email: req.body.email}})
         
-        if(colaboradores){
-            bcrypt.compare(req.body.senha, colaboradores.senha,(err, ok) => {
-                if (ok){
+        if(colaboradores) {
+            bcrypt.compare(req.body.senha, colaboradores.senha, (err, ok) => {
+                if(ok) {
                     const webtoken = jwt.sign({...colaboradores},process.env.SECRET,{expiresIn: req.body.d30===true?'30d':'2h'})
                     console.log('expiresIn:'+req.body.d30)
-                    res.status(200).send({msg: "Colaborador Logado",token: webtoken});
-                }else{
+                    res.status(200).send({msg: "Colaborador logado!", token: webtoken});
+                } else {
                     res.status(401).send({msg: "Senha login não confere!"});
                 }
             })
 
-        }else{
-            res.status(401).send({msg: "Email de login não Logado"});
+        } else {
+            res.status(401).send({msg: "Email ou senha incorretos!"});
         }
-    } catch (error) {
+    } catch(error) {
         res.status(500).send(error.message)
     }
 }
 
-const logout = async ( req, res) => {
+const logout = async (req, res) => {
    console.log('logout');
    res.status(200).send();
 }
