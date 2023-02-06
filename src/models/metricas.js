@@ -43,7 +43,22 @@ module.exports = (sequelize, DataTypes) => {
     tipo: {
       allowNull: true,
       type: DataTypes.STRING
-    }
+    },
+    linkTutorial: {
+      type: DataTypes.STRING
+    },
+    formulaMetrica: {
+      type: DataTypes.STRING
+    },
+    referencialTeorico: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [0, 500],
+          msg: "O referencial Teórico precisa ter no máximo 500 caracteres."
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Metricas',
