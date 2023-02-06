@@ -12,7 +12,7 @@ module.exports = {
       },
       id_autor: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       id_indicacao: {
         allowNull: false,
