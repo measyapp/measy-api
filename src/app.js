@@ -21,13 +21,12 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true,
             allowedHeaders: 'X-Requested-With,content-type',
-            optionsSuccessStatus: 200
+            optionsSuccessStatus: 200,
+            preflightContinue: true
 
         }));
 
 /*app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
     // handle OPTIONS method
     if ('OPTIONS' == req.method) {
         console.log("OPTIONS - SUCCESS")
