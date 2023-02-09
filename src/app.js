@@ -21,20 +21,18 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true,
             allowedHeaders: 'X-Requested-With,content-type',
-            optionsSuccessStatus: 200,
-            preflightContinue: true
+            
 
         }));
 
-/*app.use(function(req, res, next) {
+app.use(function(req, res, next) {
     // handle OPTIONS method
     if ('OPTIONS' == req.method) {
-        console.log("OPTIONS - SUCCESS")
         return res.sendStatus(200);
     } else {
         next();
     }
-});*/
+});
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
