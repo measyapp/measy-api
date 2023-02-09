@@ -12,7 +12,7 @@ module.exports = {
       },
       id_criador: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       nome: {
         allowNull: false,
