@@ -22,8 +22,8 @@ app.use(cors({
             credentials:true,
 
         }));
-
-app.use(function(req, res, next) {
+app.options('*',cors());
+/*app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     // handle OPTIONS method\
@@ -34,7 +34,7 @@ app.use(function(req, res, next) {
     } else {
         next();
     }
-});
+});*/
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
