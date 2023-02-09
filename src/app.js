@@ -20,14 +20,16 @@ app.use(cors({
                     ],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
             credentials:true,
-            allowedHeaders: 'X-Requested-With,content-type',
-            
 
         }));
 
 app.use(function(req, res, next) {
-    // handle OPTIONS method
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // handle OPTIONS method\
+    console.log("OPTIONS");
     if ('OPTIONS' == req.method) {
+        
         return res.sendStatus(200);
     } else {
         next();
