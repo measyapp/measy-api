@@ -19,10 +19,13 @@ app.use(cors({
                       
                     ],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
-            credentials:true
+            credentials:true,
+            allowedHeaders: 'X-Requested-With,content-type',
+            optionsSuccessStatus: 200
+
         }));
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     // handle OPTIONS method
@@ -32,7 +35,7 @@ app.use(function(req, res, next) {
     } else {
         next();
     }
-});
+});*/
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
