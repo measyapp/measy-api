@@ -18,9 +18,11 @@ app.use(cors({
                       'https://measy-teste.vercel.app'
                       
                     ],
-            methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD','PATCH'],
+            methods: ['POST', 'PUT', 'GET', 'HEAD','PATCH'],
             credentials:true,
             preflightContinue: true,
+            optionsSuccessStatus: 200,
+
         }));
 /*app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
