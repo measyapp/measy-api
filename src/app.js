@@ -19,19 +19,10 @@ app.use(cors({
                       
                     ],
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
-            credentials:true
+            credentials:true,
+            optionsSuccessStatus: 200,
+            preflightContinue: true, 
         }));
-
-app.options('*',function(req, res) {  
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
-    if ('OPTIONS' == req.method) {
-        res.send(200);
-    } else {
-        next();
-    }
-});
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
