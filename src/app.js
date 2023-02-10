@@ -9,19 +9,29 @@ require('dotenv').config({path:__dirname+'/./../../.env'})
 
 const app = express()
 const PORT =  process.env.PORT || process.env.PORT_BACK
-const corsOptions = {
-    origin: [ 'http://localhost:3367',
-              'http://localhost:3366',
-              'https://measy-web.vercel.app',
-              'https://measy-measy-pes.vercel.app/',
-              'https://measy-teste.vercel.app'
-              
-            ],
-    methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
-    credentials:true
-};
-app.options('*',cors(corsOptions));
-app.use(cors(corsOptions));
+
+app.use(cors({
+            origin: [ 'http://localhost:3367',
+                      'http://localhost:3366',
+                      'https://measy-web.vercel.app',
+                      'https://measy-measy-pes.vercel.app/',
+                      'https://measy-teste.vercel.app'
+                      
+                    ],
+            methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
+            credentials:true
+        }));
+
+app.options('*',function(req, res) {  
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    } else {
+        next();
+    }
+});
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
