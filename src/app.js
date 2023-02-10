@@ -18,23 +18,21 @@ app.use(cors({
                       'https://measy-teste.vercel.app'
                       
                     ],
-            methods: ['POST', 'PUT', 'GET', 'HEAD','PATCH'],
+            methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
-            preflightContinue: true,
-            allowedHeaders: 'X-Requested-With,content-type',
         }));
-/*app.use(function(req, res, next) {
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    // handle OPTIONS method\
-    console.log("OPTIONS");
+    res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
     if ('OPTIONS' == req.method) {
         
         return res.sendStatus(200);
     } else {
         next();
     }
-});*/
+});
 app.use(express.json())
 console.log(process.env.NODE_ENV);
 //Configurando Sessões
