@@ -21,8 +21,7 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET', 'HEAD','PATCH'],
             credentials:true,
             preflightContinue: true,
-            optionsSuccessStatus: 200,
-
+            allowedHeaders: 'X-Requested-With,content-type',
         }));
 /*app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
