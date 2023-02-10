@@ -23,12 +23,13 @@ app.use(cors({
             preflightContinue: true,
         }));
 
-app.use(function(req, res, next) {
+app.use(function(req, res, next) {  
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
     if ('OPTIONS' == req.method) {
-        return res.sendStatus(200);
+        res.sendStatus(200);
+        next();
     } else {
         next();
     }
