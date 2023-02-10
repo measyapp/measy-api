@@ -19,8 +19,7 @@ app.use(cors({
                       
                     ],
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
-            credentials:true,
-            preflightContinue: true,
+            credentials:true
         }));
 
 app.use(function(req, res, next) {  
@@ -29,7 +28,7 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
     if ('OPTIONS' == req.method) {
         res.sendStatus(200);
-        next();
+        next()
     } else {
         next();
     }
