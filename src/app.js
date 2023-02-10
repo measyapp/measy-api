@@ -21,7 +21,8 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
             optionsSuccessStatus: 200,
-            preflightContinue: true, 
+            preflightContinue: true,
+            allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With'] 
         }));
 app.use(express.json())
 console.log(process.env.NODE_ENV);
