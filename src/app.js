@@ -9,18 +9,7 @@ require('dotenv').config({path:__dirname+'/./../../.env'})
 
 const app = express()
 const PORT =  process.env.PORT || process.env.PORT_BACK
-app.options('*',function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    // handle OPTIONS method
-    if ('OPTIONS' == req.method) {
-        return res.sendStatus(200);
-    } else {
-        next();
-    }
-});
+
 app.use(cors({
             origin: [ 'http://localhost:3367',
                       'http://localhost:3366',
@@ -35,7 +24,6 @@ app.use(cors({
             allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With'] 
         }));
 app.use(express.json())
-console.log(process.env.NODE_ENV);
 //Configurando Sessões
 /*app.use(session({
     genid: () => { 
@@ -47,7 +35,20 @@ console.log(process.env.NODE_ENV);
     cookie: {maxAge: 10000},
 }))
 */
+
+app.options('*',function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    // handle OPTIONS method
+    if ('OPTIONS' == req.method) {
+        return res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 app.use(router)
+
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}.`)
 })
