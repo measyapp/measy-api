@@ -27,8 +27,7 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);// handle OPTIONS method\
     if ('OPTIONS' == req.method) {
-        res.sendStatus(200);
-        next()
+         res.sendStatus(200);
     } else {
         next();
     }
