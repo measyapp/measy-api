@@ -21,7 +21,7 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
             optionsSuccessStatus: 200,
-            allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With','access-control-allow-origin'] 
+            allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With','Access-Control-Allow-Origin'] 
             
                             
         }));
@@ -38,7 +38,7 @@ app.use(express.json())
 }))
 */
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,Content-Length,X-Requested-With,access-control-allow-origin');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
     } else {
         next();
     }
-});
+});*/
 app.use(router)
 
 app.listen(PORT, () => {
