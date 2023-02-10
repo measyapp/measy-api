@@ -21,7 +21,8 @@ app.use(cors({
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
             optionsSuccessStatus: 200,
-            allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With','Access-Control-Allow-Origin'] 
+            allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With',
+                             'Access-Control-Allow-Origin','x-access-token','x-alt-pass'] 
             
                             
         }));
