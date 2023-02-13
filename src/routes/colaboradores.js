@@ -4,7 +4,7 @@ import colaboradoresController from "../controllers/colaboradores"
 
 const router = express.Router()
 
-router.get("/", authUtils.verifyJWT ,colaboradoresController.index)
+router.get("/",authUtils.verifyJWT,colaboradoresController.index)
 router.post("/", authUtils.verifyJWT ,colaboradoresController.create)
 router.get("/:id", authUtils.verifyJWT ,colaboradoresController.read)
 router.put("/:id", authUtils.verifyJWT ,colaboradoresController.update)

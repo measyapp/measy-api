@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Projetos, {
         foreignKey: 'id_criador'
       })
+
       this.hasMany(models.Avaliacoes,{
         foreignKey: 'id_autor'
       })
