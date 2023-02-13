@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     id_autor: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
     id_indicacao: {
       allowNull: false,

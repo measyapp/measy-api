@@ -16,15 +16,13 @@ app.use(cors({
                       'https://measy-web.vercel.app',
                       'https://measy-measy-pes.vercel.app/',
                       'https://measy-teste.vercel.app'
-                      
                     ],
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
             optionsSuccessStatus: 200,
             allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With',
                              'Access-Control-Allow-Origin','x-access-token','x-alt-pass'] 
-            
-                            
+                             
         }));
 app.use(express.json())
 //Configurando Sessões
