@@ -2,6 +2,7 @@ import { v4 as uuid4 } from "uuid"
 import {Colaboradores} from "../models/index"
 import bcrypt, { hash } from "bcrypt"
 import e from "express";
+import hashPassword from "../utils/generatePassword"
 
 const jwt = require('jsonwebtoken');
 //action para usuário
@@ -58,17 +59,26 @@ const resetPassword = async (req,res)=>{
 }
 const signup = async (req, res) => {
     try {
-        bcrypt.genSalt(parseInt(process.env.BCRYPT_ROUNDS), (err, salt) =>{
-            bcrypt.hash(req.body.senha, salt, async (err,hash)=>{
-                console.log(req.body);
-                await Colaboradores.create({...req.body, senha: hash});
-                res.status(201).send({msg: "Usuário Criado"});
-            });
-        })
+      const { email, senha } = req.body;
+  
+      // Verifica se o e-mail já está cadastrado
+      const existingColaborador = await Colaboradores.findOne({ where: { email } });
+  
+      if (existingColaborador) {
+        res.status(400).send({ msg: "E-mail já cadastrado" });
+        return;
+      }
+  
+      // Cria o colaborador
+      const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+      await Colaboradores.create({ ...req.body, senha: hashedPassword });
+      res.send({ msg: "Usuário Criado" });
     } catch (error) {
-        res.status(500).send(error);
+      res.status(500).send(error);
     }
-}
+  };
+  
+  
 
 const login = async (req, res) => {
     try {
