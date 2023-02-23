@@ -14,16 +14,24 @@ const index = async (req, res) => {
 //action para administrador do sistema
 const create = async (req, res) => {
     try {
-        bcrypt.genSalt(parseInt(process.env.BCRYPT_ROUNDS), (err, salt) =>{
-            bcrypt.hash(req.body.senha, salt, async (err,hash)=>{
-                await Colaboradores.create({...req.body, senha: hash});
-                res.send({msg: "Usuário Criado"});
-            });
-        })
+      const { email, senha } = req.body;
+  
+      // Verifica se o e-mail já está cadastrado
+      const existingColaborador = await Colaboradores.findOne({ where: { email } });
+  
+      if (existingColaborador) {
+        res.status(400).send({ msg: "E-mail já cadastrado" });
+        return;
+      }
+  
+      // Cria o colaborador
+      const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+      await Colaboradores.create({ ...req.body, senha: hashedPassword });
+      res.status(200).send({ msg: "Usuário Criado" });
     } catch (error) {
-        res.status(500).send(error);
+      res.status(500).send(error);
     }
-}
+  };
 const read = async(req, res) => {
     try {
         const { id } = req.params;
