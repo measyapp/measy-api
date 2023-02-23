@@ -72,7 +72,7 @@ const signup = async (req, res) => {
       // Cria o colaborador
       const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
       await Colaboradores.create({ ...req.body, senha: hashedPassword });
-      res.send({ msg: "Usuário Criado" });
+      res.status(200).send({ msg: "Usuário Criado" });
     } catch (error) {
       res.status(500).send(error);
     }
