@@ -1,6 +1,7 @@
-import { Indicacoes } from "../models/index"
-
-
+import { Indicacoes, Metricas } from "../models/index"
+import { spawn } from "child_process"
+import { Op } from "sequelize"
+ 
 const index = async (req, res) => {
     try {
         const indicacoes = await Indicacoes.findAll()
@@ -56,4 +57,24 @@ const remove = async (req, res) => {
     }
 }
 
-export default { index, create, read, update, remove }
+const indicateMetric = async (req, res) => {
+    try {
+        const resposta = req.body.resposta
+        const child = spawn("python", ["src/indicacoes/grafo.py", resposta])
+        child.stdout.on("data", async function (buffer) {
+            const metricas = String(buffer).replaceAll('\"', '').split(",")
+            const indic = await Metricas.findOne({
+                where: {
+                    nome: {
+                        [Op.like]: '%' + metricas[0] + '%'
+                    }
+                }
+            })
+            res.send(indic)
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+export default { index, create, read, update, remove, indicateMetric }
