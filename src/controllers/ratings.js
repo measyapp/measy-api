@@ -1,9 +1,14 @@
-import { Avaliacoes } from "../models/index"
+import { Avaliacoes, Colaboradores } from "../models/index"
 
 
 const index = async (req, res) => {
     try {
-        const avaliacoes = await Avaliacoes.findAll()
+        const avaliacoes = await Avaliacoes.findAll({
+            include: [{
+                model: Colaboradores,
+                attributes:['nome']
+            }]
+        })
         res.send(avaliacoes)
     } catch (error) {
         res.status(500).json(error)
@@ -26,7 +31,12 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     try {
         const { id } = req.params
-        const avaliacao = await Avaliacoes.findByPk(id)
+        const avaliacao = await Avaliacoes.findByPk(id, {
+            include: [{
+                model: Colaboradores,
+                attributes:['nome']
+            }]
+        })
         if (avaliacao !== null) res.send(avaliacao)
         else res.status(404).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
