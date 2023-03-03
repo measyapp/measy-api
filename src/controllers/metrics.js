@@ -1,9 +1,11 @@
-import { Metricas } from "../models/index"
-
+import { Metricas, sequelize } from "../models/index"
+import { QueryTypes } from "sequelize"
 
 const index = async (req, res) => {
     try {
-        const metricas = await Metricas.findAll()
+        const metricas = await sequelize.query(' select coalesce(avg(A.nota),0) as nota,count(A.id) as avaliacoes, M.* '+
+                                               ' from Metricas M '+
+                                               ' left join Avaliacoes A on M.id = A.id_indicacao group by M.id', { type: QueryTypes.SELECT })
         res.send(metricas)
     } catch (error) {
         res.status(500).json(error)
@@ -26,7 +28,12 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     try {
         const { id } = req.params
-        const metrica = await Metricas.findByPk(id)
+        console.log(id);
+        const metrica =  await sequelize.query(' select coalesce(avg(A.nota),0) as nota, count(A.id) as avaliacoes, M.* '+
+        ' from Metricas M '+
+        ' left join Avaliacoes A on M.id = A.id_indicacao '+
+        ` where M.id = ${id}`, { type: QueryTypes.SELECT })
+
         if (metrica !== null) res.send(metrica)
         else res.status(404).json({msg: "Métrica não encontrada!"})
     } catch (error) {

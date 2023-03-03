@@ -88,7 +88,7 @@ const login = async (req, res) => {
             bcrypt.compare(req.body.senha, colaboradores.senha, (err, ok) => {
                 if(ok) {
                     const webtoken = jwt.sign({...colaboradores},process.env.SECRET,{expiresIn:'2h'})
-                    res.status(200).send({msg: "Colaborador logado!", token: webtoken});
+                    res.status(200).send({msg: "Colaborador logado!",userId: colaboradores.id, userNome: colaboradores.nome, token: webtoken});
                 } else {
                     res.status(401).send({msg: "Senha login não confere!"});
                 }
