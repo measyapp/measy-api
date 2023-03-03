@@ -42,15 +42,12 @@ const resetPassword = async (req,res)=>{
             
         });
         console.log(user_Id);
-        bcrypt.genSalt(parseInt(process.env.BCRYPT_ROUNDS), (err, salt) =>{
-            bcrypt.hash(req.body.senha, salt, async (err,hash)=>{
-               // console.log(req.body);
-                const result = await Colaboradores.update({...req.body,senha: hash}, {where: {id:user_Id}});            ;
-                console.log(result);
-                res.status(200).send();
-            });
-        })
-        
+        const {senha} = req.body;
+        const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+        //console.log(req.body)
+        const [colaborador] = await Colaboradores.update({...req.body, senha: hashedPassword}, {where: {id:user_Id}});
+        if (colaborador) res.status(204).send();
+        else res.status(202).json({msg: "Colaborador não encontrado"});
         
     }catch(error){
         console.log(error);
@@ -63,16 +60,18 @@ const signup = async (req, res) => {
   
       // Verifica se o e-mail já está cadastrado
       const existingColaborador = await Colaboradores.findOne({ where: { email } });
-  
+      console.log(existingColaborador);
       if (existingColaborador) {
-        res.status(400).send({ msg: "E-mail já cadastrado" });
-        return;
+        res.status(202).send({ msg: "E-mail já cadastrado" });
+      } else{
+        // Cria o colaborador
+        const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+        //console.log(req.body)
+        await Colaboradores.create({ ...req.body, senha: hashedPassword });
+        res.status(201).send({ msg: "Usuário Criado" });
       }
   
-      // Cria o colaborador
-      const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
-      await Colaboradores.create({ ...req.body, senha: hashedPassword });
-      res.status(200).send({ msg: "Usuário Criado" });
+      
     } catch (error) {
       res.status(500).send(error);
     }

@@ -26,8 +26,9 @@ const create = async (req, res) => {
   
       // Cria o colaborador
       const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+      
       await Colaboradores.create({ ...req.body, senha: hashedPassword });
-      res.status(200).send({ msg: "Usuário Criado" });
+      res.status(201).send({ msg: "Usuário Criado" });
     } catch (error) {
       res.status(500).send(error);
     }
@@ -50,9 +51,12 @@ const read = async(req, res) => {
 const update = async (req, res) => {
     try {
         const { id } = req.params;
-        const [colaborador] = await Colaboradores.update(req.body, {where: {id:id}});
-        if (colaborador) res.send({msg: "Colaborador Atualizado!"});
-        else res.status(404).json({msg: "Colaborador não encontrado"});
+        const {senha} = req.body;
+        const hashedPassword = await bcrypt.hash(senha, parseInt(process.env.BCRYPT_ROUNDS));
+        //console.log(req.body)
+        const [colaborador] = await Colaboradores.update({...req.body, senha: hashedPassword}, {where: {id:id}});
+        if (colaborador) res.status(204).send();
+        else res.status(202).json({msg: "Colaborador não encontrado"});
     } catch (error) {
         res.status(500).json(error);
     }
