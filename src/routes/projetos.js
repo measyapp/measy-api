@@ -7,6 +7,7 @@ const router = express.Router()
 router.get("/", authUtils.verifyJWT ,projetosController.index)
 router.post("/", authUtils.verifyJWT ,projetosController.create)
 router.get("/:id", authUtils.verifyJWT ,projetosController.read)
+router.get("/byUser/:id", authUtils.verifyJWT ,projetosController.readByUser)
 router.put("/:id", authUtils.verifyJWT ,projetosController.update)
 router.delete("/:id", authUtils.verifyJWT ,projetosController.remove)
 

@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     nota: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       defaultValue: 5,
       validate: {
         len: {

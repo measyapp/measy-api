@@ -1,5 +1,6 @@
-import { Projetos } from "../models/index"
 
+import { Projetos, sequelize } from "../models/index"
+import { QueryTypes } from "sequelize"
 
 const index = async (req, res) => {
     try {
@@ -33,6 +34,19 @@ const read = async (req, res) => {
         res.status(500).json(error)
     }
 }
+const readByUser = async (req, res) => {
+    try {
+        const { id } = req.params
+        const projeto = await sequelize.query('select P.* from Projetos P '+
+        `where P.id_criador = ${id}`, {type: QueryTypes.SELECT});
+        //console.log(projeto);
+        if ((projeto !== null)&&(projeto!==undefined)) res.status(200).send(projeto)
+        else res.status(404).json({msg: "Projeto não encontrado!"})
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 
 const update = async (req, res) => {
     try {
@@ -56,4 +70,4 @@ const remove = async (req, res) => {
     }
 }
 
-export default { index, create, read, update, remove }
+export default { index, create, read, update, remove,readByUser }

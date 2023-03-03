@@ -37,6 +37,19 @@ const read = async (req, res) => {
         res.status(500).json(error)
     }
 }
+const readByMetrics = async (req, res) => {
+    try {
+        const { id } = req.params
+        const avaliacao = await sequelize.query('select  C.nome,A.* from Avaliacoes A '+
+        ' left join Colaboradores C on C.id = A.id_autor '+
+        ` where A.id_indicacao = ${id}`, {type : QueryTypes.SELECT});
+
+        if (avaliacao !== null) res.send(avaliacao)
+        else res.status(404).json({msg: "Avaliação não encontrada!"})
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
 const update = async (req, res) => {
     try {
@@ -60,4 +73,4 @@ const remove = async (req, res) => {
     }
 }
 
-export default { index, create, read, update, remove }
+export default { index, create, read, update, remove,readByMetrics}
