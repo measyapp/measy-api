@@ -35,7 +35,7 @@ const read = async (req, res) => {
         ` where M.id = ${id}`, { type: QueryTypes.SELECT })
 
         if (metrica !== null) res.send(metrica[0])
-        else res.status(404).json({msg: "Métrica não encontrada!"})
+        else res.status(202).json({msg: "Métrica não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }
@@ -46,7 +46,7 @@ const update = async (req, res) => {
         const { id } = req.params
         const found = await Metricas.update(req.body, {where: {id: id}})
         if(found[0] === 1) res.send({msg: "Métrica atualizada!"})
-        else res.status(404).json({msg: "Métrica não encontrada!"})
+        else res.status(202).json({msg: "Métrica não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }
@@ -57,7 +57,7 @@ const remove = async (req, res) => {
         const { id } = req.params
         const deleted = await Metricas.destroy({where: {id: id}})
         if(deleted === 1) res.send({msg: "Métrica deletada!"})
-        else res.status(404).json({msg: "Métrica não encontrada!"})
+        else res.status(202).json({msg: "Métrica não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }

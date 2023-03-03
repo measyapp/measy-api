@@ -41,7 +41,7 @@ const read = async(req, res) => {
             res.send(colaborador);
         }
         else {
-            res.status(404).json({msg: "Colaborador não encontrado"});
+            res.status(202).json({msg: "Colaborador não encontrado"});
         }
     } catch (error) {
         res.status(500).json(error);
@@ -69,7 +69,7 @@ const remove = async (req, res) => {
         if (colaborador) {
             res.send({msg: "Colaborador Apagado!"});
         }
-        else res.status(404).json({msg: "Colaborador não encontrado"});
+        else res.status(202).json({msg: "Colaborador não encontrado"});
     } catch (error) {
         res.status(500).json(error);
     }
