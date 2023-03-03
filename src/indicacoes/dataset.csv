@@ -1,0 +1,16 @@
+Prazo de Entrega,Atividades Críticas,Entregas Incrementais,Esforço X Planejado,Escopo do Projeto,Ciente satisfeito,Orçamento e Cronograma,Mudancas no Produto,Processos Eficientes,Entrega para Cliente,Métrica Recomendada,Nome da Métrica
+t,t,f,t,f,f,f,f,f,f,1,Capacidade de trabalho
+t,t,t,t,f,f,f,f,f,f,2,Velocidade
+f,f,t,t,t,f,f,f,t,f,3,Número de desenvolvedores por feature/stories
+t,f,t,t,f,f,f,f,f,f,4,Gráfico de Burndown
+f,f,f,f,t,f,f,t,t,t,5,Cobertura de teste unitário por história de usuário
+t,f,t,t,f,f,t,t,f,f,6,Acurácia nas estimativas
+f,f,t,t,t,f,f,t,f,f,7,Porcentagem do trabalho adotado
+f,f,f,t,t,f,f,f,f,f,8,Fator foco
+t,f,t,t,f,f,t,t,f,f,9,Acurácia da previsão futura
+f,f,t,t,t,f,f,t,f,f,10,Porcentagem de trabalho descoberto
+t,t,t,t,f,f,t,f,f,f,11,Vazão (Throughput)
+t,t,t,t,f,f,f,f,f,f,12,WiP
+f,f,f,f,f,t,f,f,f,f,13,Satisfação dos clientes
+t,t,f,f,f,f,f,f,f,f,14,Tempo em processo (Lead Time)
+t,t,f,f,f,f,f,f,f,f,15,Cycle Time (Cycle time)

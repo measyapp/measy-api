@@ -1,9 +1,10 @@
-import { Avaliacoes } from "../models/index"
-
+import { Avaliacoes, Colaboradores, sequelize } from "../models/index"
+import { QueryTypes } from "sequelize"
 
 const index = async (req, res) => {
     try {
-        const avaliacoes = await Avaliacoes.findAll()
+        const avaliacoes = await sequelize.query('select  C.nome,A.* from Avaliacoes A '+
+        ' left join Colaboradores C on C.id = A.id_autor ', {type : QueryTypes.SELECT});
         res.send(avaliacoes)
     } catch (error) {
         res.status(500).json(error)
@@ -26,7 +27,10 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     try {
         const { id } = req.params
-        const avaliacao = await Avaliacoes.findByPk(id)
+        const avaliacao = await sequelize.query('select  C.nome,A.* from Avaliacoes A '+
+        ' left join Colaboradores C on C.id = A.id_autor '+
+        ` where A.id = ${id}`, {type : QueryTypes.SELECT});
+
         if (avaliacao !== null) res.send(avaliacao)
         else res.status(404).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
