@@ -32,7 +32,7 @@ const read = async (req, res) => {
         ` where A.id = ${id}`, {type : QueryTypes.SELECT});
 
         if (avaliacao !== null) res.send(avaliacao)
-        else res.status(404).json({msg: "Avaliação não encontrada!"})
+        else res.status(202).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }
@@ -45,7 +45,7 @@ const readByMetrics = async (req, res) => {
         ` where A.id_indicacao = ${id}`, {type : QueryTypes.SELECT});
 
         if (avaliacao !== null) res.send(avaliacao)
-        else res.status(404).json({msg: "Avaliação não encontrada!"})
+        else res.status(202).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }
@@ -56,7 +56,7 @@ const update = async (req, res) => {
         const { id } = req.params
         const found = await Avaliacoes.update(req.body, {where: {id: id}})
         if(found[0] === 1) res.send({msg: "Avaliação atualizada!"})
-        else res.status(404).json({msg: "Avaliação não encontrada!"})
+        else res.status(202).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }
@@ -67,7 +67,7 @@ const remove = async (req, res) => {
         const { id } = req.params
         const deleted = await Avaliacoes.destroy({where: {id: id}})
         if(deleted === 1) res.send({msg: "Avaliação deletada!"})
-        else res.status(404).json({msg: "Avaliação não encontrada!"})
+        else res.status(202).json({msg: "Avaliação não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
     }

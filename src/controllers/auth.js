@@ -13,7 +13,7 @@ const getTokenResetPassword = async (req,res)=>{
         console.log(email);
         if(colaboradores === null){
             //console.log("Usuário não encontrado");
-            return res.status(204).send("Usuário não encontrado");
+            return res.status(202).send("Usuário não encontrado");
         }
 
         const webtoken = jwt.sign({userid: colaboradores.id},process.env.SECRET,{expiresIn: '1h'});
@@ -31,7 +31,7 @@ const resetPassword = async (req,res)=>{
         //console.log(token);
         let user_Id = 0;
 
-        if (!token) return res.status(404).json({ auth: false, message: 'No token provided.' });
+        if (!token) return res.status(202).json({ auth: false, message: 'No token provided.' });
         
         //Verifica a valdade do token informado
         jwt.verify(token, process.env.SECRET, function(err, decoded) {
