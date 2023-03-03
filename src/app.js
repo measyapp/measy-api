@@ -13,9 +13,11 @@ const PORT =  process.env.PORT || process.env.PORT_BACK
 app.use(cors({
             origin: [ 'http://localhost:3367',
                       'http://localhost:3366',
-                      'https://measy-web.vercel.app/',
-                      'https://measy-measy-pes.vercel.app/',
-                      'https://measy-teste.vercel.app/'
+                      'https://measy-web.vercel.app',
+                      'https://measy-measy-pes.vercel.app',
+                      'https://measy-teste.vercel.app',
+                      'https://measy-api-service-teste.herokuapp.com',
+                      'https://measy-api-service.herokuapp.com'
                     ],
             methods: ['POST', 'PUT', 'GET','OPTIONS', 'HEAD','PATCH','DELETE'],
             credentials:true,
