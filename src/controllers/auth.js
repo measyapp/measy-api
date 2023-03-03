@@ -89,12 +89,12 @@ const login = async (req, res) => {
                     const webtoken = jwt.sign({...colaboradores},process.env.SECRET,{expiresIn:'2h'})
                     res.status(200).send({msg: "Colaborador logado!",userId: colaboradores.id, userNome: colaboradores.nome, token: webtoken});
                 } else {
-                    res.status(401).send({msg: "Senha login não confere!"});
+                    res.status(202).send({msg: "Senha login não confere!"});
                 }
             })
 
         } else {
-            res.status(401).send({msg: "Email ou senha incorretos!"});
+            res.status(202).send({msg: "Email ou senha incorretos!"});
         }
     } catch(error) {
         res.status(500).send(error.message)

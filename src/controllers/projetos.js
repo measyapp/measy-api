@@ -46,7 +46,7 @@ const readByUser = async (req, res) => {
         ` where P.id_criador = ${id}`, {type: QueryTypes.SELECT});
         //console.log(projeto);
         if ((projeto !== null)&&(projeto!==undefined)) res.status(200).send(projeto)
-        else res.status(404).json({msg: "Projeto não encontrado!"})
+        else res.status(202).json({msg: "Projeto não encontrado!"})
     } catch (error) {
         console.log(error )
         res.status(500).json(error)
