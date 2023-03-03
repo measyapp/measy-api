@@ -27,22 +27,28 @@ const create = async (req, res) => {
 const read = async (req, res) => {
     try {
         const { id } = req.params
-        const projeto = await Projetos.findByPk(id)
-        if (projeto !== null) res.send(projeto)
+        const projeto = await sequelize.query('select P.*, I.id_metrica  as indicacao from Projetos P '+
+        ' left join Indicacoes I on I.id_projeto = P.id '+
+        ` where P.id = ${id} limit 1`, {type: QueryTypes.SELECT});
+
+        if (projeto !== null) res.status(200).send(projeto[0]);
         else res.status(404).json({msg: "Projeto não encontrado!"})
     } catch (error) {
+        console.log(error);
         res.status(500).json(error)
     }
 }
 const readByUser = async (req, res) => {
     try {
         const { id } = req.params
-        const projeto = await sequelize.query('select P.* from Projetos P '+
-        `where P.id_criador = ${id}`, {type: QueryTypes.SELECT});
+        const projeto = await sequelize.query('select P.*, I.id_metrica  as indicacao from Projetos P '+
+        ' left join Indicacoes I on I.id_projeto = P.id '+
+        ` where P.id_criador = ${id}`, {type: QueryTypes.SELECT});
         //console.log(projeto);
         if ((projeto !== null)&&(projeto!==undefined)) res.status(200).send(projeto)
         else res.status(404).json({msg: "Projeto não encontrado!"})
     } catch (error) {
+        console.log(error )
         res.status(500).json(error)
     }
 }
