@@ -70,6 +70,7 @@ const indicateMetric = async (req, res) => {
                     }
                 }
             })
+            res.setHeader('Access-Control-Allow-Origin',process.env.APP_URL)
             res.status(200).send(indic);
         })
     } catch (error) {
