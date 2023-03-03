@@ -21,7 +21,7 @@ app.use(cors({
             credentials:true,
             optionsSuccessStatus: 200,
             allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With',
-                             'Access-Control-Allow-Origin','x-access-token','x-alt-pass'] 
+                             'Access-Control-Allow-Origin','x-access-token','x-altpass-token'] 
                              
         }));
 app.use(express.json())
@@ -48,6 +48,8 @@ app.use(express.json())
         next();
     }
 });*/
+
+app
 app.use(router)
 
 app.listen(PORT, () => {

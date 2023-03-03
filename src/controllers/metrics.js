@@ -34,7 +34,7 @@ const read = async (req, res) => {
         ' left join Avaliacoes A on M.id = A.id_indicacao '+
         ` where M.id = ${id}`, { type: QueryTypes.SELECT })
 
-        if (metrica !== null) res.send(metrica)
+        if (metrica !== null) res.send(metrica[0])
         else res.status(404).json({msg: "Métrica não encontrada!"})
     } catch (error) {
         res.status(500).json(error)
