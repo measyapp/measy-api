@@ -41,7 +41,7 @@ const resetPassword = async (req,res)=>{
             user_Id = decoded.userid;
             
         });
-
+        console.log(user_Id);
         bcrypt.genSalt(parseInt(process.env.BCRYPT_ROUNDS), (err, salt) =>{
             bcrypt.hash(req.body.senha, salt, async (err,hash)=>{
                // console.log(req.body);

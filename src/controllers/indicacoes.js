@@ -70,6 +70,7 @@ const indicateMetric = async (req, res) => {
                     }
                 }
             })
+            res.status(200).send(indic);
         })
     } catch (error) {
         res.status(500).json(error)
