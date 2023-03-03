@@ -60,7 +60,10 @@ const remove = async (req, res) => {
 const indicateMetric = async (req, res) => {
     try {
         const resposta = req.body.resposta
+        console.log(resposta)
+        console.log("chama python")
         const child = spawn("python", ["src/indicacoes/grafo.py", resposta])
+        console.log("processsamento")
         child.stdout.on("data", async function (buffer) {
             const metricas = String(buffer).replaceAll('\"', '').split(",")
             const indic = await Metricas.findOne({
@@ -70,7 +73,7 @@ const indicateMetric = async (req, res) => {
                     }
                 }
             })
-            res.setHeader('Access-Control-Allow-Origin', '*')
+            console.log("Fim da busca")
             res.status(200).send(indic);
         })
     } catch (error) {

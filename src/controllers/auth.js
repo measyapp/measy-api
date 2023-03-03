@@ -81,8 +81,8 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     try {
+        console.log(req.body.email)
         const colaboradores =  await Colaboradores.findOne({where: {email: req.body.email}})
-        
         if(colaboradores) {
             bcrypt.compare(req.body.senha, colaboradores.senha, (err, ok) => {
                 if(ok) {
